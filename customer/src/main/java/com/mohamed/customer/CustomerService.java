@@ -23,7 +23,7 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
        boolean isFraud = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}" , Boolean.class , customer.getId()
+                "http://FRAUD/api/v1/fraud-check/{customerId}" , Boolean.class , customer.getId()
         );
 
         System.out.println("Hiiii " +isFraud);
