@@ -1,6 +1,7 @@
 package com.mabrar.fraud;
 
 
+import com.mohamed.clients.fraud.FraudCheckResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,8 @@ public class FraudController {
     FraudCheckService fraudCheckService;
 
     @GetMapping(path = "{customerId}")
-    public boolean isFraudster(@PathVariable("customerId") Integer customerId) {
-        return fraudCheckService.isFraudulentCustomer(customerId);
+    public FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerId) {
+        boolean isFradulentCustomer =  fraudCheckService.isFraudulentCustomer(customerId);
+        return new FraudCheckResponse(isFradulentCustomer);
     }
 }

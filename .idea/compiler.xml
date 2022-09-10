@@ -7,12 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="clients" />
         <module name="eureka-server" />
         <module name="fraud" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="clients" target="11" />
       <module name="customer" target="11" />
       <module name="eureka-server" target="11" />
       <module name="fraud" target="11" />
@@ -21,8 +23,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="clients" options="" />
       <module name="customer" options="--add-modules java.base" />
-      <module name="eureka-server" options="" />
+      <module name="eureka-server" options="--add-modules java.base" />
       <module name="fraud" options="--add-modules java.base" />
     </option>
   </component>
