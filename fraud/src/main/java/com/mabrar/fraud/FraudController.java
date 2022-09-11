@@ -1,8 +1,10 @@
 package com.mabrar.fraud;
 
 
-import com.mohamed.clients.fraud.FraudCheckResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,14 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/fraud-check")
+@Slf4j
 public class FraudController {
 
     @Autowired
     FraudCheckService fraudCheckService;
 
-    @GetMapping(path = "{customerId}")
-    public FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerId) {
+    @GetMapping(path = "{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> isFraudster(@PathVariable("customerId") Integer customerId ) {
+        log.info("fraud check request for customer {}", customerId);
         boolean isFradulentCustomer =  fraudCheckService.isFraudulentCustomer(customerId);
-        return new FraudCheckResponse(isFradulentCustomer);
+        //return false;
+        return ResponseEntity.ok(isFradulentCustomer);
     }
 }

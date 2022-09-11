@@ -31,13 +31,14 @@ public class CustomerService {
         customer.setLastName(request.getEmail());
 
         customerRepository.saveAndFlush(customer);
+        FraudCheckResponse fraudster = fraudClient.isFraudster(customer.getId());
         notificationClient.sendNotification(
                 new NotificationRequest(
                         customer.getId(),customer.getEmail(),String.format("Hi %s, welcome ...",
                         customer.getFirstname())
                 )
         );
-        FraudCheckResponse fraudster = fraudClient.isFraudster(customer.getId());
+
 
 
     }
